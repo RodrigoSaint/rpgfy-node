@@ -1,0 +1,24 @@
+{
+  "name": "rpgfy-node",
+  "version": "0.1.0",
+  "description": "This project is part of a project to experiment different tecnologies. This is a node api for the rpgfy project.",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mongodb": "^2.2.33"
+  },
+  "devDependencies": {
+    "mocha": "^4.0.1"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "rpgfy",
+    "node",
+    "skill"
+  ],
+  "author": "Rodrigo Santos da Silva <rodrigo.saint01@live.com>",
+  "license": "ISC"
+}
