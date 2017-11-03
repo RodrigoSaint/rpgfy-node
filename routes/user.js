@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../model/user')
-
+const getConnection = require('../config/mongo-connection');
 
 router.post('/', (request, response, next) => 
 {
@@ -12,7 +12,9 @@ router.post('/', (request, response, next) =>
 })
 
 router.post('/', (request, response) => {
-    response.status(201).send()
+    getConnection()
+        .then(connection => connection.collection("user").insert(new User(request.body)))
+        .then(() => response.status(201).send())
 })
 
 router.get('/', (request, response, next) => {

@@ -13,7 +13,7 @@ User.prototype.assign = function (input)
     this.playerClass = input.playerClass;
 }
 
-User.prototype.validation = {
+const userValidation = {
     name: {
         presence: {allowEmpty :false},
         length: {maximum: 20, minimum: 3}
@@ -32,7 +32,7 @@ User.prototype.validation = {
 
 User.prototype.validate = function validate()
 {
-    return validateJs.async(this, this.validation)
+    return validateJs.async(this, userValidation)
 }
 
 module.exports = User;

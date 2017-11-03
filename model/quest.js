@@ -11,10 +11,10 @@ Quest.prototype.assign = function (input)
     this.title = input.title;
     this.description = input.description;
     this.difficulty = input.difficulty;
-    this.dueDate = moment(input.dueDate, 'DD/MM/YYYY');
+    this.dueDate = moment(input.dueDate, 'DD/MM/YYYY').toDate();
 }
 
-Quest.prototype.validation = {
+const questValidation = {
     title: {
         presence: {allowEmpty: false },
         length: {
@@ -38,7 +38,7 @@ Quest.prototype.validation = {
 
 Quest.prototype.validate = function validate()
 {
-    return validateJs.async(this, this.validation)    
+    return validateJs.async(this, questValidation)    
 }
 
 module.exports = Quest;

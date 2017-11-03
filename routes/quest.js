@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Quest = require('../model/quest');
+const getConnection = require('../config/mongo-connection');
 
 router.get('/', (request, response) => {
     response.send([
@@ -29,8 +30,11 @@ router.post('/', (request, response, next) =>
         .catch(validationError => response.status(400).send(validationError))
 })
 
-router.post('/', (request, response) => {
-    response.status(201).send();    
+router.post('/', (request, response) => 
+{
+    getConnection()
+        .then(connection => connection.collection("quest").insert(new Quest(request.body)))
+        .then(() => response.status(201).send())
 })
 
 router.patch('/status', (request, response) => {
