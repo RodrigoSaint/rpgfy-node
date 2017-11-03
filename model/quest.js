@@ -11,7 +11,7 @@ Quest.prototype.assign = function (input)
     this.title = input.title;
     this.description = input.description;
     this.difficulty = input.difficulty;
-    this.dueDate = input.dueDate;
+    this.dueDate = moment(input.dueDate, 'DD/MM/YYYY');
 }
 
 Quest.prototype.validation = {
