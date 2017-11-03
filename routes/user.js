@@ -1,6 +1,15 @@
 const express = require('express');
 const router = express.Router();
+const User = require('../model/user')
 
+
+router.post('/', (request, response, next) => 
+{
+    let user = new User(request.body);
+    user.validate()
+        .then(() => next())
+        .catch(validationError => response.status(400).send(validationError))
+})
 
 router.post('/', (request, response) => {
     response.status(201).send()

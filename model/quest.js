@@ -8,7 +8,10 @@ function Quest(input)
 
 Quest.prototype.assign = function (input) 
 {
-    
+    this.title = input.title;
+    this.description = input.description;
+    this.difficulty = input.difficulty;
+    this.dueDate = input.dueDate;
 }
 
 Quest.prototype.validation = {

@@ -7,7 +7,10 @@ function User(input)
 
 User.prototype.assign = function (input) 
 {
-    
+    this.name = input.name;
+    this.email = input.email;
+    this.password = input.password;
+    this.playerClass = input.playerClass;
 }
 
 User.prototype.validation = {

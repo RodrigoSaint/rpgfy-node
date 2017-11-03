@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const Quest = require('../model/quest');
 
 router.get('/', (request, response) => {
     response.send([
@@ -18,6 +19,14 @@ router.get('/', (request, response) => {
           "dueDate": "10/10/10"
         }
       ])
+})
+
+router.post('/', (request, response, next) => 
+{
+    let quest = new Quest(request.body);
+    quest.validate()
+        .then(() => next())
+        .catch(validationError => response.status(400).send(validationError))
 })
 
 router.post('/', (request, response) => {
