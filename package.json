@@ -4,6 +4,7 @@
   "description": "This project is part of a project to experiment different tecnologies. This is a node api for the rpgfy project.",
   "main": "index.js",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "chai": "^4.1.2",
     "express": "^4.16.2",
