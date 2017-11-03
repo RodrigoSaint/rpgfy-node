@@ -13,6 +13,25 @@ router.post('/', (request, response, next) =>
         .catch(validationError => response.status(400).send(validationError))
 })
 
+router.post('/', (request, response, next) => 
+{
+    getConnection()
+        .then(connection => connection.collection('user')
+            .findOne({
+                $or: [
+                    {name: request.body.name}, 
+                    { email: request.body.email}
+                ]
+            }))
+        .then(user => 
+        {
+            if(!user) return next();
+            if(user.name == request.body.name) 
+                return response.status(400).send({name: 'Repeated name'})
+            return response.status(400).send({email: 'Repeated email'})
+        })
+})
+
 router.post('/', (request, response) => 
 {
     let user = new User(request.body);
