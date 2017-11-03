@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const getConnection = require('../config/mongo-connection');
+const userRepository = require('../repository/user');
 
 const User = require('../model/user')
 const hashPassword = require('../model/password-hash');
@@ -15,14 +15,7 @@ router.post('/', (request, response, next) =>
 
 router.post('/', (request, response, next) => 
 {
-    getConnection()
-        .then(connection => connection.collection('user')
-            .findOne({
-                $or: [
-                    {name: request.body.name}, 
-                    { email: request.body.email}
-                ]
-            }))
+    userRepository.findByNameOrEmail(request.body.name, request.body.email)
         .then(user => 
         {
             if(!user) return next();
@@ -30,15 +23,17 @@ router.post('/', (request, response, next) =>
                 return response.status(400).send({name: 'Repeated name'})
             return response.status(400).send({email: 'Repeated email'})
         })
+        .catch(() => response.status(500).send());
+        
 })
 
 router.post('/', (request, response) => 
 {
     let user = new User(request.body);
-    hashPassword(user.password)
+    hashPassword.hashPassword(user.password)
         .then(hash => user.password = hash)
-        .then(getConnection)
-        .then(connection => connection.collection("user").insert(user))
+        .then(userRepository.getCollection)
+        .then(userCollection => userCollection.insert(user))
         .then(() => response.status(201).send())
         .catch(() => response.status(500).send());
 })
