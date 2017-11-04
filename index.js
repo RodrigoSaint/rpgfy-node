@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 require('./config/date-config');
 
@@ -9,7 +10,10 @@ const userRoute = require('./routes/user');
 const loginRoute = require('./routes/login');
 const questRoute = require('./routes/quest');
 const questReportRoute = require('./routes/quest-report');
+const credentialMiddleware = require('./middleware/credential');
 
+application.use(credentialMiddleware);
+application.use(cors());
 application.use(bodyParser.json());
 
 application.use('/user', userRoute);

@@ -24,7 +24,7 @@ router.get('/', (request, response) => {
 
 router.post('/', (request, response, next) => 
 {
-    let quest = new Quest(request.body);
+    let quest = new Quest(request.body, response.locals.userId);
     quest.validate()
         .then(() => next())
         .catch(validationError => response.status(400).send(validationError))

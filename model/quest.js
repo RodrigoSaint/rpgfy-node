@@ -1,17 +1,18 @@
 const validateJs = require('validate.js');
 const moment = require('moment');
 
-function Quest(input) 
+function Quest(input, userId) 
 {
-    this.assign(input)
+    this.assign(input, userId)
 }
 
-Quest.prototype.assign = function (input) 
+Quest.prototype.assign = function (input, userId) 
 {
     this.title = input.title;
     this.description = input.description;
     this.difficulty = input.difficulty;
     this.dueDate = moment(input.dueDate, 'DD/MM/YYYY').toDate();
+    this.userId = userId;
 }
 
 const questValidation = {
