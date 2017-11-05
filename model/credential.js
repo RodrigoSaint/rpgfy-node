@@ -25,7 +25,7 @@ Credential.getUser = function getUser(token)
     {
         jwt.verify(token, secret, jwtOptions, function (error, result) 
         {
-            error ? reject(error) : resolve(token)
+            error ? reject(error) : resolve(result)
         })
     }) 
 }

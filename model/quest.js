@@ -11,7 +11,7 @@ Quest.prototype.assign = function (input, userId)
     this.title = input.title;
     this.description = input.description;
     this.difficulty = input.difficulty;
-    this.dueDate = moment(input.dueDate, 'DD/MM/YYYY').toDate();
+    if(input.dueDate) this.dueDate = moment(input.dueDate, 'DD/MM/YYYY').toDate();
     this.userId = userId;
 }
 
