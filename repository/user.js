@@ -1,4 +1,5 @@
 const getConnection = require('../config/mongo-connection');
+const mongodb = require('mongodb');
 
 function UserRepository() 
 {
@@ -19,6 +20,12 @@ UserRepository.prototype.findByNameOrEmail = function findByNameOrEmail(name, em
 {
     let queryByNameOrEmail = this.getQueryByNameOrEmail(name, email);
     return this.getCollection().then(collection => collection.findOne(queryByNameOrEmail));
+}
+
+UserRepository.prototype.findById = function findById(userId) 
+{
+    let queryById = {_id: mongodb.ObjectId.createFromHexString(userId)};
+    return this.getCollection().then(userCollection => userCollection.findOne(queryById))
 }
 
 module.exports = new UserRepository();

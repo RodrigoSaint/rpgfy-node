@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const userRepository = require('../repository/user');
+const questRepository = require('../repository/quest');
 
 const User = require('../model/user')
 const hashPassword = require('../model/password-hash');
@@ -39,16 +40,16 @@ router.post('/', (request, response) =>
 })
 
 router.get('/', (request, response, next) => {
-    response.send({
-        "id": "123",
-        "level": 1,
-        "experience": 0,
-        "name": "rodrigosaint",
-        "email": "rodrigo.saint01@live.com",
-        "playerClass": ""
-      })
-      next()
+    userRepository.findById(response.locals.userId)
+        .then(setUserLevel)
+        .then(user => response.status(200).send(user));
 })
-
+let setUserLevel = user => 
+    questRepository.getUserQuestExp(user._id.toString())
+    .then(summary => {
+        user.experience = summary.experience || 0;
+        user.level = Math.ceil(user.experience / 10);
+        return user;
+    })
 
 module.exports = router;
