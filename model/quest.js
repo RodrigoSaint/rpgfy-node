@@ -13,6 +13,7 @@ Quest.prototype.assign = function (input, userId)
     this.difficulty = input.difficulty;
     if(input.dueDate) this.dueDate = moment(input.dueDate, 'DD/MM/YYYY').toDate();
     this.userId = userId;
+    this.status = 1;
 }
 
 const questValidation = {
