@@ -7,7 +7,7 @@ const Credential = require('../model/credential');
 
 router.post('/', (request, response) => 
 {
-    userRepository.findByNameOrEmail(request.body.name, request.body.email)
+    userRepository.findByNameOrEmail(request.body.name, request.body.name)
         .then(user => 
         {
             if(!user) throw 'user not found';
