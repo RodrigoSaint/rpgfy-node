@@ -1,9 +1,3 @@
-/*
-db.getCollection('quest').aggregate([
-    {$match: {userId: '5a004f4e20e8f51a2c10b513', status: 2}},
-    {$group: {_id: '$userId', total: {$sum: '$difficulty'}}}
-])
-*/
 const mongodb = require('mongodb');
 const getConnection = require('../config/mongo-connection');
 
