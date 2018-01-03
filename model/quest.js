@@ -11,9 +11,10 @@ Quest.prototype.assign = function (input, userId)
     this.title = input.title;
     this.description = input.description;
     this.difficulty = input.difficulty;
-    if(input.dueDate) this.dueDate = moment(input.dueDate, 'DD/MM/YYYY').toDate();
+    if(input.dueDate) this.dueDate = moment(input.dueDate).toDate();
     this.userId = userId;
     this.status = 1;
+    this.mob = input.mob;
 }
 
 const questValidation = {
@@ -35,7 +36,8 @@ const questValidation = {
     },
     dueDate: {datetime:{
         earliest: moment().add(-1, 'days').toDate()
-    }}
+    }},
+    mob: {presence: true}
 }
 
 Quest.prototype.validate = function validate()
