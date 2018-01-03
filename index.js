@@ -25,6 +25,6 @@ application.use('/quest', questRoute);
 application.use('/mob', mobRoute);
 application.use('/quest-report', questReportRoute);
 
-application.listen(3000, () => {
-    console.log('listening 3000')
+application.listen(process.env.PORT || 3000, () => {
+    console.log('listening ' + process.env.PORT)
 })
