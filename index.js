@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+require('dotenv').load();
+
 require('./config/date-config');
 
 const application = express();
