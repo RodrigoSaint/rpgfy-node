@@ -20,8 +20,8 @@
     "nodemon": "^1.12.1"
   },
   "scripts": {
-    "test": "mocha --recursive",
-    "start": "nodemon ."
+    "test": "./node_modules/.bin/mocha --recursive",
+    "start": "./node_modules/.bin/nodemon ."
   },
   "keywords": [
     "rpgfy",
